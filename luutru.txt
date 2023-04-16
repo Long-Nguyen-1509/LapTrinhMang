@@ -1,4 +1,2 @@
-test
-script
-tcp
-client
+test lan 1
+test lan 2

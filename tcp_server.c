@@ -76,13 +76,14 @@ int main(int argc, char *argv[]){
     // Nhan du lieu tu client ghi ra file
     char buf[2048];
     f = fopen(argv[3], "w");
-    printf("Recieving client input...");
+    printf("Recieving client input...\n");
     while(1){
         int res = recv(client, buf, sizeof(buf), 0);
         if (strncmp(buf, "exit", 4) == 0)
             break;
         fwrite(buf, 1, res, f);
     }
+    printf("Da ghi du lieu vao file\n");
 
     // Dong ket noi
     fclose(f);

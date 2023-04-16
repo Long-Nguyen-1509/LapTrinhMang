@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
     // Nhan du lieu tu client ghi ra file
     char buf[2048];
     FILE *f = fopen(argv[2], "w");
-    printf("Recieving client input...");
+    printf("Recieving client input...\n");
     while(1){
         // Lay current time
         time_t current_time;
@@ -84,6 +84,7 @@ int main(int argc, char *argv[]){
         fwrite(str, 1, strlen(str), f);
         fwrite(buf, 1, res, f);
     }
+    printf("Da ghi du lieu vao file\n");
 
     // Dong ket noi
     fclose(f);

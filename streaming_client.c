@@ -9,7 +9,7 @@
 #include <sys/socket.h>
 #endif
 
-int main() {
+int main(){
     // Khoi tao winsock
     WSADATA wsa;
     printf("Initialising Winsock...");
@@ -30,48 +30,19 @@ int main() {
         perror("connect() failed");
         return 1;
     }
-        
-    // Truyen nhan du lieu
-    char mssv[9];
-    char hoten[64];
-    char ns[11];
-    float dtb;
-    char buf[256];
 
-    while (1)
-    {
-        printf("Nhap thong tin cua sinh vien:\n");
-        printf("Nhap MSSV: ");
-        scanf("%s", mssv);
-        
-        // Xoa \n trong bo dem
-        getchar();
-
-        if (strncmp(mssv, "0000", 4) == 0)
-            break;
-
-        printf("Nhap Ho ten: ");
-        fgets(hoten, sizeof(hoten), stdin);
-        hoten[strlen(hoten) - 1] = 0;
-
-        printf("Nhap Ngay sinh: ");
-        scanf("%s", ns);
-
-        // Xoa \n trong bo dem
-        getchar();
-
-        printf("Nhap Diem TB: ");
-        scanf("%f", &dtb);
-
-        // Xoa \n trong bo dem
-        getchar();
-
-        sprintf(buf, "%s %s %s %.2f", mssv, hoten, ns, dtb);
+    // Truyen du lieu
+    char buf[512];
+    FILE *f = fopen("streaming_log.txt", "r");
+    fgets(buf, sizeof(buf), f);
+    if (buf != NULL){
         send(client, buf, strlen(buf), 0);
-    }
+    }   
+    puts(buf);
+    fclose(f);
 
-    // Ket thuc, dong socket
+    // Dong ket noi
     close(client);
-
     return 0;
+    
 }
